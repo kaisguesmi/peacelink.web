@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Diagramme de cas d'utilisation</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="stage">
+    <svg viewBox="0 0 2000 2000" aria-label="Diagramme de cas d'utilisation">
+      <defs>
+        <marker id="arrow-hollow" markerWidth="14" markerHeight="14" refX="12" refY="7" orient="auto">
+          <path d="M13,7 L1,13 L4,7 L1,1 Z" fill="#fff" stroke="#111" stroke-width="2"/>
+        </marker>
+      </defs>
+      <g id="layer-system" class="soft-shadow"></g>
+      <g id="layer-connections"></g>
+      <g id="layer-nodes" class="soft-shadow"></g>
+    </svg>
+  </div>
+
+  <!-- Mettre EXACTEMENT le même nom de fichier que votre JS -->
+  <script src="app.js" defer></script>
+</body>
+</html>
