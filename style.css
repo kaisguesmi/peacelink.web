@@ -1,0 +1,590 @@
+/* --- 1. Importations et Variables --- */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Poppins:wght@600;700&display=swap');
+
+:root {
+    /* NEW: Updated color palette based on screenshot */
+    --primary-color: #2ECC71; /* Green accent */
+    --secondary-color: #5DADE2; /* Kept for some elements like role badges */
+    
+    --blanc-pur: #FFFFFF;
+    --gris-clair: #F4F6F9; /* Light background */
+    --gris-moyen: #E9ECEF; /* Borders, received bubbles */
+    --gris-fonce: #333333; /* Main text */
+    --gris-texte-secondaire: #888; /* Lighter text */
+    
+    --bleu-nuit: #1B263B; /* Darker text for titles */
+    --rouge-alerte: #E74C3C;
+    --violet-admin: #8E44AD;
+
+    --font-titre: 'Poppins', sans-serif;
+    --font-texte: 'Open Sans', sans-serif;
+    
+    --sidebar-width: 260px;
+    --sidebar-width-collapsed: 80px;
+    --topbar-height: 70px;
+    --border-radius: 8px; /* Slightly squared */
+    --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    --transition-speed: 0.3s ease;
+}
+
+/* --- 2. Styles de base et Reset --- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100%; height: 100%; overflow-x: hidden; }
+body { 
+    font-family: var(--font-texte); 
+    background-color: var(--blanc-pur); /* Changed from gris-clair */
+    color: var(--gris-fonce); 
+    font-size: 16px; 
+    line-height: 1.6; 
+}
+a { text-decoration: none; color: inherit; }
+
+/* --- 3. Layout Principal --- */
+.sidebar { 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: var(--sidebar-width); 
+    height: 100%; 
+    background-color: var(--gris-clair); /* NEW: Sidebar background */
+    display: flex; 
+    flex-direction: column; 
+    border-right: 1px solid var(--gris-moyen); 
+    transition: width var(--transition-speed); 
+    z-index: 1000; 
+}
+.main-content { 
+    margin-left: var(--sidebar-width); 
+    width: calc(100% - var(--sidebar-width)); 
+    background-color: var(--blanc-pur); /* NEW: Main content background */
+    transition: margin-left var(--transition-speed), width var(--transition-speed); 
+}
+
+/* --- 4. Barre latérale (Sidebar) --- */
+.sidebar-header { 
+    padding: 0 20px; 
+    display: flex; 
+    align-items: center; 
+    border-bottom: 1px solid var(--gris-moyen); 
+    min-height: var(--topbar-height); 
+}
+.sidebar-header .logo { display: flex; align-items: center; justify-content: flex-start; }
+.logo-text { font-family: var(--font-titre); font-size: 24px; color: #22c55e; font-weight: 700; }
+.sidebar-nav { flex-grow: 1; padding: 20px 10px; overflow-y: auto; }
+.nav-item { 
+    display: flex; 
+    align-items: center; 
+    padding: 12px 20px; 
+    margin-bottom: 5px; 
+    border-radius: var(--border-radius); 
+    color: var(--gris-texte-secondaire); /* NEW: Default text color */
+    font-weight: 600; 
+    cursor: pointer; 
+    transition: background-color var(--transition-speed), color var(--transition-speed); 
+}
+.nav-item i { 
+    width: 25px; 
+    margin-right: 15px; 
+    font-size: 18px; 
+    text-align: center; 
+    color: var(--gris-texte-secondaire); /* NEW: Icon color */
+    transition: color var(--transition-speed);
+}
+.nav-item:hover { 
+    background-color: var(--gris-moyen); 
+    color: var(--gris-fonce); 
+}
+.nav-item:hover i {
+    color: var(--gris-fonce);
+}
+.nav-item.active { 
+    background-color: var(--primary-color); /* NEW: Green active */
+    color: var(--blanc-pur); 
+    box-shadow: none; /* NEW: Removed shadow */
+}
+.nav-item.active i {
+    color: var(--blanc-pur);
+}
+
+.sidebar-footer { 
+    padding: 10px; 
+    border-top: 1px solid var(--gris-moyen); 
+    display: flex; 
+    flex-direction: column; 
+    align-items: flex-start; 
+}
+.user-profile { 
+    padding: 10px; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    transition: background-color var(--transition-speed); 
+    width: 100%; 
+}
+.user-profile:hover { background-color: var(--gris-moyen); }
+.user-info { color: var(--gris-fonce); }
+.user-role { font-size: 12px; color: var(--gris-texte-secondaire); }
+.user-id-display {
+    font-size: 10px;
+    color: #aaa;
+    padding: 5px 10px;
+    word-break: break-all;
+    width: 100%;
+}
+
+/* --- 5. Barre Supérieure (Topbar) --- */
+.topbar { 
+    height: var(--topbar-height); 
+    background-color: var(--blanc-pur); 
+    padding: 0 30px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    border-bottom: 1px solid var(--gris-moyen); 
+}
+.topbar-left { display: flex; align-items: center; }
+.menu-toggle { 
+    background: none; 
+    border: none; 
+    font-size: 22px; 
+    cursor: pointer; 
+    margin-right: 20px; 
+    color: var(--gris-fonce); 
+}
+
+/* --- 6. Contenu Principal et Boutons --- */
+.content-wrapper { padding: 30px; background-color: var(--blanc-pur); }
+.page-header h1 { font-family: var(--font-titre); font-size: 28px; color: var(--bleu-nuit); }
+.page-subtitle { color: var(--gris-texte-secondaire); }
+
+.btn, .btn-primary { 
+    padding: 10px 20px; 
+    border-radius: var(--border-radius); 
+    border: 1px solid transparent; 
+    cursor: pointer; 
+    font-weight: 600; 
+    font-size: 14px; 
+    display: flex; 
+    align-items: center; 
+    gap: 8px; 
+    transition: all 0.2s; 
+}
+.btn-primary { 
+    background-color: var(--primary-color); /* NEW: Green button */
+    color: var(--blanc-pur); 
+}
+.btn-primary:hover { 
+    transform: translateY(-2px); 
+    box-shadow: 0 4px 10px rgba(46, 204, 113, 0.4); 
+}
+.btn-secondary { background-color: var(--gris-moyen); color: var(--gris-fonce); }
+.btn-secondary:hover { background-color: #d1d5db; }
+.btn-success { background-color: var(--primary-color); color: var(--blanc-pur); }
+.btn-success:hover { background-color: #27ae60; }
+.btn-danger { background-color: var(--rouge-alerte); color: var(--blanc-pur); }
+.btn-danger:hover { background-color: #e23c28; }
+
+/* --- 7. Cartes et Grilles (Tableau de bord) --- */
+.stats-grid, .charts-grid { display: grid; gap: 25px; margin-bottom: 25px; }
+.stats-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.charts-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.stat-card, .chart-card, .table-card, .profile-card { 
+    background-color: var(--blanc-pur); 
+    padding: 25px; 
+    border-radius: var(--border-radius); 
+    box-shadow: var(--card-shadow); 
+    border: 1px solid var(--gris-moyen); /* NEW: Added border */
+}
+.stat-icon { 
+    background-color: var(--secondary-color) !important; /* NEW: Use blue for icons */
+}
+.stat-icon.green { background-color: var(--primary-color) !important; }
+.stat-icon.red { background-color: var(--rouge-alerte) !important; }
+.chart-body canvas {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+
+/* --- 9. Page Utilisateurs (Tableau) --- */
+.table-wrapper { overflow-x: auto; }
+.data-table { width: 100%; border-collapse: collapse; }
+.data-table th, .data-table td { padding: 15px; text-align: left; 
+border-bottom: 1px solid var(--gris-moyen); vertical-align: middle; }
+.data-table th { font-family: var(--font-titre); font-size: 14px; color:
+ var(--gris-texte-secondaire); text-transform: uppercase; white-space: nowrap; }
+.user-cell-avatar { 
+    background-color: var(--secondary-color); /* NEW: Blue avatar */
+    color: var(--blanc-pur); 
+}
+.status-badge.active { background-color: rgba(46, 204, 113, 0.2); color: var(--primary-color); }
+.role-badge.expert { background-color: rgba(93, 173, 226, 0.2); color: var(--secondary-color); }
+
+/* --- 10. Page Paramètres (Profil) --- */
+.profile-fields input:focus, .profile-fields-select:focus { 
+    outline: none; 
+    border-color: var(--primary-color); /* NEW: Green focus */
+}
+
+/* --- 11. Gestion des pages et Responsive --- */
+.sidebar.collapsed { width: var(--sidebar-width-collapsed); }
+.sidebar.collapsed .sidebar-header .logo { justify-content: center; }
+.sidebar.collapsed .sidebar-nav span, .sidebar.collapsed .user-info, 
+.sidebar.collapsed .badge { display: none; }
+.sidebar.collapsed .nav-item { justify-content: center; padding: 12px 10px; }
+.sidebar.collapsed .nav-item i { margin-right: 0; }
+.sidebar.collapsed .user-profile { justify-content: center; }
+.sidebar.collapsed .user-profile:hover { background-color: transparent; }
+.sidebar.collapsed .user-avatar { margin-right: 0; }
+.sidebar.collapsed .user-id-display { display: none; }
+.sidebar.collapsed + .main-content { 
+    margin-left: var(--sidebar-width-collapsed); 
+    width: calc(100% - var(--sidebar-width-collapsed));
+}
+
+.page-content { display: none; animation: fadeIn 0.4s ease-in-out; }
+.page-content.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to
+ { opacity: 1; transform: translateY(0); } }
+
+@media (max-width: 992px) {
+    .sidebar { transform: translateX(-100%); }
+    .sidebar.collapsed { transform: translateX(0); }
+    .main-content { margin-left: 0; width: 100%; }
+    .sidebar.toggled { transform: translateX(0); }
+    .sidebar.toggled + .main-content { margin-left: var(--sidebar-width); }
+    .sidebar.collapsed.toggled + .main-content { margin-left: var(--sidebar-width-collapsed); }
+}
+
+/* --- 12. STYLES ADDITIONNELS (Communication Center) --- */
+
+/* NEW: 2-Column Layout for Messages */
+.communication-layout {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    height: calc(100vh - var(--topbar-height) - 60px); /* Full page height */
+    border: 1px solid var(--gris-moyen);
+    border-radius: var(--border-radius);
+    background: var(--blanc-pur);
+    overflow: hidden;
+}
+
+.conversation-list {
+    border-right: 1px solid var(--gris-moyen);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.conversation-list-header {
+    padding: 20px;
+    font-family: var(--font-titre);
+    font-size: 20px;
+    color: var(--bleu-nuit);
+    border-bottom: 1px solid var(--gris-moyen);
+    flex-shrink: 0;
+}
+
+.conversation-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 20px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--gris-moyen);
+    transition: background-color var(--transition-speed);
+}
+.conversation-item:hover {
+    background-color: var(--gris-clair);
+}
+.conversation-item.active {
+    background-color: var(--gris-moyen);
+}
+.conversation-item .user-cell-avatar {
+    flex-shrink: 0;
+}
+.conversation-info {
+    overflow: hidden;
+    width: 100%;
+}
+.conversation-info .user-name {
+    font-weight: 600;
+    color: var(--gris-fonce);
+    display: block;
+}
+.conversation-info .last-message {
+    font-size: 14px;
+    color: var(--gris-texte-secondaire);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.conversation-list-empty {
+    padding: 20px;
+    text-align: center;
+    color: var(--gris-texte-secondaire);
+    margin-top: 30px;
+}
+
+
+.chat-window {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.chat-window-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--gris-moyen);
+    flex-shrink: 0;
+}
+.chat-window-header .user-name {
+    font-family: var(--font-titre);
+    font-size: 18px;
+    color: var(--bleu-nuit);
+}
+.chat-window-header .user-role {
+    font-size: 14px;
+    color: var(--gris-texte-secondaire);
+}
+
+
+.chat-messages {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background-color: var(--blanc-pur); /* NEW: Chat background */
+}
+
+.message-bubble {
+    padding: 12px 18px;
+    border-radius: 20px;
+    max-width: 70%;
+    line-height: 1.5;
+    position: relative; /* For delete button */
+}
+
+/* NEW: Green sent bubble */
+.message-bubble.sent {
+    background-color: var(--primary-color);
+    color: var(--blanc-pur);
+    border-bottom-right-radius: 5px;
+    align-self: flex-end;
+}
+
+/* NEW: Grey received bubble */
+.message-bubble.received {
+    background-color: var(--gris-moyen);
+    color: var(--gris-fonce);
+    border-bottom-left-radius: 5px;
+    align-self: flex-start;
+}
+
+.message-meta {
+    display: block;
+    font-size: 10px;
+    margin-top: 5px;
+    opacity: 0.7;
+}
+.message-bubble.sent .message-meta { text-align: right; }
+
+/* NEW: Repositioned delete button */
+.delete-message-btn {
+    position: absolute;
+    top: -5px;
+    left: -15px;
+    font-size: 14px;
+    cursor: pointer;
+    color: var(--rouge-alerte);
+    background: var(--blanc-pur);
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+    border: none;
+    padding: 0;
+}
+.message-bubble:hover .delete-message-btn {
+    opacity: 1;
+}
+.message-bubble.received .delete-message-btn {
+    left: auto;
+    right: -15px;
+}
+
+.chat-input-form {
+    display: flex;
+    gap: 10px;
+    padding: 20px;
+    border-top: 1px solid var(--gris-moyen);
+    background-color: var(--gris-clair); /* NEW: Input area bg */
+    flex-shrink: 0;
+}
+.chat-input-form input {
+    flex-grow: 1;
+    padding: 12px 15px;
+    border: 1px solid var(--gris-moyen);
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: var(--font-texte);
+}
+.chat-input-form input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+.chat-input-form .btn-primary {
+    flex-shrink: 0;
+}
+
+
+/* Styles pour la Modale d'Erreur */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    animation: fadeIn 0.3s ease;
+}
+.modal-content {
+    background-color: var(--blanc-pur);
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 500px;
+    overflow: hidden;
+}
+.modal-header {
+    background-color: var(--gris-clair);
+    padding: 15px 25px;
+    border-bottom: 1px solid var(--gris-moyen);
+}
+.modal-header h2 {
+    font-family: var(--font-titre);
+    color: var(--bleu-nuit);
+    margin: 0;
+}
+.modal-header i {
+    color: var(--primary-color); /* NEW: Green for success */
+    margin-right: 10px;
+}
+/* NEW: Specific styling for ERROR modal title */
+.modal-header.error i {
+    color: var(--rouge-alerte);
+}
+.modal-body {
+    padding: 25px;
+    font-size: 16px;
+    line-height: 1.7;
+}
+.modal-close {
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+    transition: color 0.2s;
+    padding: 10px 15px;
+    line-height: 1;
+}
+.modal-close:hover {
+    color: var(--gris-fonce);
+}
+/**
+ * Custom styles for modern form inputs, simulating the effects of Tailwind CSS.
+ * This ensures the inputs have consistent padding, borders, rounded corners,
+ * and clear focus states.
+ */
+
+/* =========================================================================
+ * 1. Base Styles for All Inputs (Text, Email, Number, Select)
+ * These styles correspond to: w-full p-3 border border-gray-300 rounded-lg shadow-sm bg-white text-gray-800
+ * =========================================================================*/
+input[type="text"],
+input[type="email"],
+input[type="number"],
+select {
+    /* w-full */
+    width: 100%;
+    /* p-3 */
+    padding: 0.75rem; 
+    /* border border-gray-300 */
+    border: 1px solid #d1d5db; 
+    /* rounded-lg */
+    border-radius: 0.5rem; 
+    /* shadow-sm */
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    /* bg-white text-gray-800 */
+    background-color: #ffffff;
+    color: #1f2937;
+    /* Smooth transition for focus effect */
+    transition: all 150ms ease-in-out;
+}
+
+/* =========================================================================
+ * 2. Focus State Styles
+ * These styles correspond to: focus:ring-indigo-500 focus:border-indigo-500
+ * =========================================================================*/
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+select:focus {
+    /* Ensure default outline is removed for a cleaner look */
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    
+    /* Focus Ring (box-shadow equivalent of ring-indigo-500) */
+    --tw-ring-color: #6366f1;
+    --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 2px #ffffff; /* ring-offset-2 equivalent */
+    --tw-ring-shadow: var(--tw-ring-offset-shadow), 0 0 0 4px var(--tw-ring-color);
+    box-shadow: var(--tw-ring-shadow);
+    
+    /* Focus Border (border-indigo-500) */
+    border-color: #6366f1; 
+}
+
+/* =========================================================================
+ * 3. Disabled State Styles
+ * These styles correspond to: disabled:bg-gray-50 disabled:text-gray-400
+ * =========================================================================*/
+input[type="text"]:disabled,
+input[type="email"]:disabled,
+input[type="number"]:disabled,
+select:disabled {
+    background-color: #f9fafb; /* Lighter background */
+    color: #9ca3af; /* Lighter text color */
+    cursor: not-allowed;
+}
+
+/* =========================================================================
+ * 4. Custom Select Dropdown Arrow
+ * This uses a data URI to embed an SVG arrow, replacing the browser's default.
+ * The 'appearance: none' property MUST be applied to the <select> element 
+ * in the HTML to hide the native arrow for this custom one to display correctly.
+ * =========================================================================*/
+select {
+    /* appearance-none equivalent */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    
+    /* Custom SVG Arrow */
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236B7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1.5em 1.5em;
+}

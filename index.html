@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PeaceLink - Admin Dashboard</title>
+    
+    <!-- 1. Font Imports (from your CSS) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for icons (required by your CSS) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- 2. Link to your new external CSS file -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- --- 3. Layout Principal (Sidebar) --- -->
+    <aside class="sidebar" id="sidebar">
+        <!-- En-tête de la barre latérale -->
+        <div class="sidebar-header">
+            <a href="#" class="logo">
+                <span class="logo-text">PeaceLink</span>
+            </a>
+        </div>
+        
+        <!-- Navigation -->
+        <nav class="sidebar-nav">
+            <div class="nav-item active" data-page="page-dashboard">
+                <i class="fa-solid fa-home"></i>
+                <span>Dashboard</span>
+            </div>
+            <div class="nav-item" data-page="page-users">
+                <i class="fa-solid fa-users"></i>
+                <span>Users</span>
+            </div>
+            <div class="nav-item" data-page="page-stories">
+                <i class="fa-solid fa-book-open"></i>
+                <span>Stories</span>
+            </div>
+            <div class="nav-item" data-page="page-initiatives">
+                <i class="fa-solid fa-seedling"></i>
+                <span>Initiatives</span>
+            </div>
+            <!-- RENAMED: from page-history -->
+            <div class="nav-item" data-page="page-messages">
+                <i class="fa-solid fa-comments"></i>
+                <span>Messages</span>
+            </div>
+            <!-- RENAMED: from page-moderation -->
+            <div class="nav-item" data-page="page-reports" id="nav-reports" style="display: none;">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>Reports</span>
+            </div>
+            <div class="nav-item" data-page="page-statistics">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>Statistics</span>
+            </div>
+            <div class="nav-item" data-page="page-settings">
+                <i class="fa-solid fa-cog"></i>
+                <span>Settings</span>
+            </div>
+        </nav>
+        
+        <!-- Pied de page de la barre latérale -->
+        <div class="sidebar-footer">
+            <div class="user-profile" data-page="page-settings">
+                <i class="fa-solid fa-user-circle user-avatar"></i>
+                <div class="user-info">
+                    <span class="user-name" id="current-user-name">Loading...</span>
+                    <span class="user-role" id="current-user-role">...</span>
+                </div>
+            </div>
+             <div class="user-id-display">
+                <strong>Your User ID:</strong>
+                <span id="current-user-id-display">...</span>
+             </div>
+        </div>
+    </aside>
+
+    <!-- --- 3. Layout Principal (Contenu) --- -->
+    <main class="main-content" id="main-content">
+        <!-- Barre supérieure -->
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="menu-toggle" id="menu-toggle">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+            <div class="topbar-right">
+                <button class="icon-btn">
+                    <i class="fa-solid fa-bell"></i>
+                    <span class="notification-dot"></span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Conteneur de contenu principal -->
+        <div class="content-wrapper" id="content-container">
+
+            <!-- Page 1: Dashboard (Based on UML & Prompts) -->
+            <section class="page-content active" id="page-dashboard">
+                <div class="page-header">
+                    <h1>Dashboard</h1>
+                    <p class="page-subtitle">Overview of your PeaceLink activity</p>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-label">Total Users</span>
+                            <span class="stat-value" id="stats-total-users">0</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green"><i class="fa-solid fa-book-open"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-label">Total Stories</span>
+                            <span class="stat-value" id="stats-total-stories">0</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fa-solid fa-seedling"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-label">Total Initiatives</span>
+                            <span class="stat-value" id="stats-total-initiatives">0</span>
+                        </div>
+                    </div>
+                     <div class="stat-card">
+                        <div class="stat-icon red"><i class="fa-solid fa-shield-halved"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-label">Pending Reports</span>
+                            <span class="stat-value" id="stats-total-reports">0</span>
+                        </div>
+                    </div>
+                     <div class="stat-card">
+                        <div class="stat-icon"><i class="fa-solid fa-comments"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-label">Total Chats</span>
+                            <span class="stat-value" id="stats-total-chats">0</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green"><i class="fa-solid fa-person-chalkboard"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-label">Experts Online</span>
+                            <span class="stat-value" id="stats-experts-online">0</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- New Charts Grid -->
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>User Growth (Mock)</h3>
+                        </div>
+                        <div class="chart-body">
+                            <canvas id="userGrowthChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Story Emotions (Mock)</h3>
+                        </div>
+                        <div class="chart-body">
+                            <canvas id="emotionTrendChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Page 2: Users (To start chats) -->
+            <section class="page-content" id="page-users">
+                <div class="page-header">
+                    <h1>All Users</h1>
+                    <p class="page-subtitle">Start a conversation with a student or expert</p>
+                </div>
+                <div class="table-card">
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>User</th>
+                                    <th>Role</th>
+                                    <th>Status</th>
+                                    <th>User ID</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="users-table-body">
+                                <!-- JS will populate this -->
+                                <tr><td colspan="5">Loading users...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- NEW Page 3: Stories -->
+            <section class="page-content" id="page-stories">
+                <div class="page-header">
+                    <h1>Stories Management</h1>
+                    <p class="page-subtitle">Review, approve, and manage user stories</p>
+                </div>
+                <div class="table-card">
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Author</th>
+                                    <th>Emotion</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="stories-table-body">
+                                <!-- JS will populate this -->
+                                <tr><td colspan="5">Loading stories...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- NEW Page 4: Initiatives -->
+            <section class="page-content" id="page-initiatives">
+                <div class="page-header">
+                    <h1>Initiatives Management</h1>
+                    <p class="page-subtitle">Approve and manage community initiatives</p>
+                </div>
+                <div class="table-card">
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Category</th>
+                                    <th>Creator</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="initiatives-table-body">
+                                <!-- JS will populate this -->
+                                <tr><td colspan="5">Loading initiatives...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Page 5: Messages (Communication Center) -->
+            <!-- THIS IS THE NEW MERGED PAGE -->
+            <section class="page-content" id="page-messages">
+                <div class="page-header">
+                    <h1>Communication Center</h1>
+                    <p class="page-subtitle">Connect with members and send announcements</p>
+                </div>
+                
+                <div class="communication-layout">
+                    
+                    <!-- Left Column: Conversation List -->
+                    <div class="conversation-list">
+                        <div class="conversation-list-header">
+                            Conversations
+                        </div>
+                        <div id="conversation-list-container">
+                            <!-- JS will populate this -->
+                            <div class="conversation-list-empty">Loading conversations...</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Column: Chat Window -->
+                    <div class="chat-window">
+                        <div class="chat-window-header" id="chat-window-header" style="display: none;">
+                            <span class="user-cell-avatar" id="chat-header-avatar">?</span>
+                            <div>
+                                <span class="user-name" id="chat-with-name">...</span>
+                                <span class="user-role" id="chat-with-role">...</span>
+                            </div>
+                        </div>
+                        
+                        <div class="chat-messages" id="chat-messages-container">
+                            <!-- Messages will be loaded here by JS -->
+                            <div class="message-bubble-placeholder">Select a conversation to start chatting.</div>
+                        </div>
+                        
+                        <form class="chat-input-form" id="chat-send-form" style="display: none;">
+                            <input type="text" id="chat-message-input" placeholder="Type your message..." autocomplete="off">
+                            <button type="submit" class="btn-primary">
+                                <i class="fa-solid fa-paper-plane"></i>
+                                <span>Send</span>
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+            </section>
+            
+            <!-- Page 6: Active Chat (REMOVED - Merged into page-messages) -->
+
+            <!-- Page 7: Reports (Moderation) -->
+            <section class="page-content" id="page-reports">
+                <div class="page-header">
+                    <h1>Reports Panel</h1>
+                    <p class="page-subtitle">Review and moderate reported conversations</p>
+                </div>
+                <div class="table-card">
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Conversation ID</th>
+                                    <th>Participants</th>
+                                    <th>Last Message</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="reports-table-body">
+                                <!-- JS will populate this -->
+                                <tr><td colspan="4">Loading reports...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- NEW Page 8: Statistics -->
+            <section class="page-content" id="page-statistics">
+                <div class="page-header">
+                    <h1>Statistics</h1>
+                    <p class="page-subtitle">Visual analytics for platform activity</p>
+                </div>
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>User Growth (Mock)</h3>
+                        </div>
+                        <div class="chart-body">
+                            <!-- Canvas for the chart -->
+                            <canvas id="userGrowthChart-main" height="300"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Story Emotions (Mock)</h3>
+                        </div>
+                        <div class="chart-body">
+                            <!-- Canvas for the chart -->
+                            <canvas id="emotionTrendChart-main" height="300"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Page 9: Settings (From CSS) -->
+            <section class="page-content" id="page-settings">
+                 <div class="page-header">
+                    <h1>Settings</h1>
+                    <p class="page-subtitle">Manage your profile and application settings</p>
+                </div>
+                <div class="profile-card">
+                    <form id="settings-form">
+                        <div class="profile-grid">
+                            <div class="profile-avatar-wrapper">
+                                <div class="profile-avatar">
+                                    <i class="fa-solid fa-user"></i>
+                                </div>
+                            </div>
+                            <div class="profile-fields">
+                                <div class="form-group">
+                                    <label for="profile-name">Full Name</label>
+                                    <input type="text" id="profile-name" placeholder="Enter your name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="profile-role">Role</label>
+                                    <select id="profile-role" class="profile-fields-select">
+                                        <option value="student">Student</option>
+                                        <option value="expert">Expert</option>
+                                        <option value="admin">Admin</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="profile-email">Email (read-only)</label>
+                                    <input type="email" id="profile-email" value="user@university.com" readonly>
+                                </div>
+
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fa-solid fa-save"></i>
+                                        <span>Save Changes</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Modal for errors/notifications -->
+    <div id="notification-modal" class="modal-backdrop" style="display: none;">
+        <div class="modal-content">
+            <span class="modal-close" id="notification-modal-close">&times;</span>
+            <div class="modal-header" id="notification-modal-header">
+                <h2><i class="fa-solid fa-check-circle"></i> Notification</h2>
+            </div>
+            <div class="modal-body">
+                <p id="notification-modal-message">An error occurred.</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 3. Firebase SDKs (MANDATORY) -->
+    <script type="module">
+        // These global variables are provided by the environment.
+        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+
+        // Make them available to the script.js file
+        window.firebaseConfig = firebaseConfig;
+        window.initialAuthToken = initialAuthToken;
+        window.appId = appId;
+    </script>
+    
+    <!-- Firebase Imports -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+    <!-- 4. Link to your new external JS file -->
+    <script src="script.js" type="module"></script>
+</body>
+</html>
