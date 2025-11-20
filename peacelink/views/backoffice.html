@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Back Office - PeaceLink</title>
+
+    <link rel="stylesheet" href="../backofficeStyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Chargement du contrôleur JS -->
+    <script src="../backoffice.js" defer></script>
+</head>
+<body>
+
+    <!-- =========== 1. Barre Latérale =========== -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <a href="#" class="logo">
+                <img src="../mon-logo.png" alt="Logo PeaceLink">
+                <span>PeaceLink</span>
+            </a>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-item active" data-page="dashboard">
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="#" class="nav-item" data-page="stories">
+                <i class="fa-solid fa-book-open"></i>
+                <span>Stories</span>
+            </a>
+            <a href="#" class="nav-item" data-page="initiatives">
+                <i class="fa-solid fa-hand-holding-heart"></i>
+                <span>Initiatives</span>
+            </a>
+            <a href="#" class="nav-item" data-page="users">
+                <i class="fa-solid fa-users"></i>
+                <span>Users</span>
+            </a>
+            <a href="#" class="nav-item" data-page="settings">
+                <i class="fa-solid fa-gear"></i>
+                <span>Settings</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="user-profile">
+                <i class="fa-solid fa-user-circle user-avatar"></i>
+                <div class="user-info">
+                    <span class="user-name">Admin User</span>
+                    <span class="user-role">Administrator</span>
+                </div>
+            </div>
+            <button class="logout-btn">
+                <i class="fa-solid fa-right-from-bracket"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- =========== 2. Contenu Principal =========== -->
+    <div class="main-content">
+
+        <!-- Topbar -->
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="menu-toggle" id="menu-toggle">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+            <div class="topbar-right">
+                <button class="icon-btn">
+                    <i class="fa-solid fa-bell"></i>
+                    <span class="notification-dot"></span>
+                </button>
+                <button class="icon-btn">
+                    <i class="fa-solid fa-envelope"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Contenu -->
+        <main class="content-wrapper" id="content-container">
+
+            <!-- DASHBOARD -->
+            <section id="page-dashboard" class="page-content active">
+                <div class="page-header">
+                    <h1>Dashboard</h1>
+                </div>
+
+                <!-- Stats -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon green"><i class="fa-solid fa-hand-holding-heart"></i></div>
+                        <div>
+                            <p class="stat-label">Initiatives validées</p>
+                            <h2 class="stat-value" id="stat-active-initiatives">0</h2>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon red"><i class="fa-solid fa-flag"></i></div>
+                        <div>
+                            <p class="stat-label">En attente</p>
+                            <h2 class="stat-value" id="stat-pending-initiatives">0</h2>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- INITIATIVES -->
+            <section id="page-initiatives" class="page-content">
+                <div class="page-header">
+                    <h1>Initiatives</h1>
+                    <p>Valider ou refuser les initiatives proposées.</p>
+                </div>
+
+                <div class="table-card">
+                    <h3>Liste des initiatives</h3>
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Titre</th>
+                                    <th>Organisation</th>
+                                    <th>Catégorie</th>
+                                    <th>Lieu</th>
+                                    <th>Date</th>
+                                    <th>Statut</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="initiatives-table-body">
+                                <!-- rempli par JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+</body>
+</html>

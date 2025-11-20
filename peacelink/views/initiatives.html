@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PeaceLink - Initiatives Locales</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="../initiatives.js" defer></script>
+</head>
+<body>
+
+    <!-- =========== Barre de Navigation Principale =========== -->
+    <header class="main-navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                <a href="index.html">
+                    <img src="../mon-logo.png" alt="Logo PeaceLink" class="logo-img">
+                    <span class="site-name">PeaceLink</span>
+                </a>
+            </div>
+            <nav class="navbar-links">
+                <ul>
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="stories.html" class="nav-link">Stories</a></li>
+                    <li><a href="initiatives.html" class="nav-link active">Initiatives</a></li>
+                    <li><a href="join.html" class="nav-link btn-join-us">Join Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- =========== Contenu principal Initiatives =========== -->
+    <main class="initiatives-main">
+
+        <!-- Choix du rôle = correspond à Client / Organisation / Admin -->
+        <section class="role-switcher">
+            <div class="role-switcher-inner">
+                <label for="role-select">Je suis :</label>
+                <select id="role-select">
+                    <option value="client">Client (citoyen)</option>
+                    <option value="organisation">Organisation</option>
+                    <option value="admin">Admin</option>
+                </select>
+                <span class="role-hint">
+                    Le rôle choisi va afficher les actions disponibles (cas d’utilisation).
+                </span>
+            </div>
+        </section>
+
+        <!-- Liste des événements (Consulter les événements) -->
+        <section class="mission-section">
+            <div class="mission-container">
+                <div class="page-header">
+                    <h2>Initiatives locales</h2>
+                    <p class="page-subtitle">
+                        Découvrez les événements solidaires, écologiques et éducatifs près de chez vous.
+                    </p>
+                    <button id="btn-open-create" class="btn-primary btn-role-organisation">
+                        + Créer une initiative
+                    </button>
+                </div>
+
+                <div id="events-list" class="event-grid">
+                    <!-- Les cartes d'événements sont générées par initiatives.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Détail d'un événement + participation -->
+        <section id="event-detail-section" class="mission-section hidden">
+            <div class="mission-container">
+                <button type="button" id="btn-back-to-list" class="btn-secondary back-btn">
+                    ← Retour à la liste
+                </button>
+
+                <article id="event-detail-card" class="event-detail-card">
+                    <!-- Contenu rempli dynamiquement par JS -->
+                </article>
+
+                <!-- Formulaire de participation (Participer à un événement + Remplir un formulaire) -->
+                <div class="participation-form-wrapper btn-role-client">
+                    <h3>Participer à cette initiative</h3>
+                    <p>Remplissez le formulaire pour confirmer votre participation.</p>
+
+                    <form id="participation-form" class="event-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="participant-name">Nom complet</label>
+                                <input type="text" id="participant-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="participant-email">Email</label>
+                                <input type="email" id="participant-email" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="participant-message">Message (optionnel)</label>
+                                <textarea id="participant-message" rows="3" placeholder="Pourquoi souhaitez-vous participer ?"></textarea>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-success">
+                            S'inscrire à l'événement
+                        </button>
+                        <p id="participation-feedback" class="form-feedback"></p>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Création d'un événement (Organisation) -->
+        <section id="event-create-section" class="mission-section hidden">
+            <div class="mission-container">
+                <button type="button" id="btn-close-create" class="btn-secondary back-btn">
+                    ← Retour aux initiatives
+                </button>
+
+                <h2>Créer une nouvelle initiative</h2>
+                <p class="page-subtitle">
+                    En tant qu’organisation, vous pouvez proposer un événement qui sera ensuite validé par l’administrateur.
+                </p>
+
+                <form id="create-event-form" class="event-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="event-title">Titre de l'initiative</label>
+                            <input type="text" id="event-title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="event-category">Catégorie</label>
+                            <select id="event-category" required>
+                                <option value="Écologie">Écologie</option>
+                                <option value="Solidarité">Solidarité</option>
+                                <option value="Éducation">Éducation</option>
+                                <option value="Citoyenneté">Citoyenneté</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="event-location">Lieu</label>
+                            <input type="text" id="event-location" placeholder="Ville, quartier..." required>
+                        </div>
+                        <div class="form-group">
+                            <label for="event-date">Date</label>
+                            <input type="date" id="event-date" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="event-capacity">Nombre de places</label>
+                            <input type="number" id="event-capacity" min="1" value="20" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="event-description">Description</label>
+                            <textarea id="event-description" rows="4" required></textarea>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary">
+                        Enregistrer l'initiative (en attente de validation)
+                    </button>
+                    <p id="create-event-feedback" class="form-feedback"></p>
+                </form>
+            </div>
+        </section>
+
+        <!-- Validation admin (Valider une initiative) -->
+        <section id="admin-section" class="mission-section hidden">
+            <div class="mission-container">
+                <h2>Validation des initiatives</h2>
+                <p class="page-subtitle">
+                    En tant qu'administrateur, vous pouvez valider ou refuser les initiatives proposées.
+                </p>
+                <div id="admin-events-list" class="event-grid">
+                    <!-- rempli par JS -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- =========== Pied de page (Footer) =========== -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <!-- même footer que sur index.html -->
+            <!-- ... -->
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 PeaceLink. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
