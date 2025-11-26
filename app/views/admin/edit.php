@@ -1,6 +1,6 @@
 <section class="table-card">
     <h3>Modifier l'offre</h3>
-    <form method="post" action="?controller=admin&action=update" class="form-card">
+    <form method="post" action="?controller=admin&action=update" class="form-card" id="admin-offer-edit-form">
         <input type="hidden" name="id" value="<?= $offre['id_offre'] ?>">
         <label>Titre
             <input type="text" name="titre" value="<?= htmlspecialchars($offre['titre']) ?>">

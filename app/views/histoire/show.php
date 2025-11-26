@@ -110,15 +110,14 @@ $user = $_SESSION['user'] ?? null;
 <?php if (!empty($user)): ?>
     <div class="table-card" style="margin-top: 30px;">
         <h3>Ajouter un commentaire</h3>
-        <form method="post" action="<?= $base ?>/?controller=commentaires&action=store" class="comment-form-wrapper" style="margin-top: 15px;">
+        <form method="post" action="<?= $base ?>/?controller=commentaires&action=store" class="comment-form-wrapper" style="margin-top: 15px;" id="story-show-comment-form">
             <input type="hidden" name="id_histoire" value="<?= $story['id_histoire'] ?>">
             <div class="comment-input-wrapper">
                 <textarea name="contenu" 
                           rows="3" 
                           class="comment-input" 
                           placeholder="Exprimez votre soutien..."
-                          style="resize: vertical; min-height: 80px;"
-                          required></textarea>
+                          style="resize: vertical; min-height: 80px;"></textarea>
             </div>
             <div style="margin-top: 10px;">
                 <button type="submit" class="btn-primary">

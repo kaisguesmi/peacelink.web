@@ -16,7 +16,7 @@ $base = rtrim($config['app']['base_url'], '/');
         <?= nl2br(htmlspecialchars($story['contenu'])) ?>
     </p>
 
-    <form method="post" action="<?= $base ?>/?controller=admin&action=rejectStory">
+    <form method="post" action="<?= $base ?>/?controller=admin&action=rejectStory" id="admin-reject-story-form">
         <input type="hidden" name="id" value="<?= $story['id_histoire'] ?>">
         <div class="form-group">
             <label for="rejection_reason">Rejection reason (optional)</label>
@@ -26,7 +26,7 @@ $base = rtrim($config['app']['base_url'], '/');
             <button type="submit" class="btn-danger">
                 <i class="fa-solid fa-xmark"></i> Reject story
             </button>
-            <a href="<?= $base ?>/?controller=admin&action=pendingStories" class="btn-secondary">Cancel</a>
+            <a href="<?= $base ?>/?controller=admin&action=stories" class="btn-secondary">Cancel</a>
         </div>
     </form>
 </div>

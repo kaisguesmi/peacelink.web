@@ -263,13 +263,9 @@ class AdminController extends Controller
     public function pendingStories()
     {
         $this->requireAdmin();
-        
-        // Get all pending stories with user information
-        $stories = $this->histoireModel->getAllPendingWithUsers();
-        
-        $this->view('admin/pending-stories', [
-            'stories' => $stories
-        ], 'back');
+        // This dedicated pending stories page is no longer used.
+        // Redirect admins to the main stories listing instead.
+        $this->redirect('?controller=admin&action=stories');
     }
 
     public function stories()
@@ -305,7 +301,7 @@ class AdminController extends Controller
             'read' => 0,
         ]);
 
-        $this->redirect('?controller=admin&action=pendingStories');
+        $this->redirect('?controller=admin&action=stories');
     }
 
     public function rejectStory()
@@ -339,7 +335,7 @@ class AdminController extends Controller
             'read' => 0,
         ]);
 
-        $this->redirect('?controller=admin&action=pendingStories');
+        $this->redirect('?controller=admin&action=stories');
     }
 
     public function deleteStory()

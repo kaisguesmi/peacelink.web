@@ -189,8 +189,7 @@ $userReaction = $post['user_reaction'] ?? null;
                     <input type="text" 
                            class="comment-input" 
                            placeholder="Écrivez un commentaire..." 
-                           name="content" 
-                           required>
+                           name="content">
                     <button type="submit" class="comment-submit-btn">
                         <i class="fa-solid fa-paper-plane"></i>
                     </button>

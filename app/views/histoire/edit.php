@@ -14,7 +14,7 @@ $base = rtrim($config['app']['base_url'], '/');
 </div>
 
 <div class="profile-card">
-    <form method="post" action="<?= $base ?>/?controller=histoire&action=update" class="profile-fields">
+    <form method="post" action="<?= $base ?>/?controller=histoire&action=update" class="profile-fields" id="story-edit-form">
         <input type="hidden" name="id" value="<?= $story['id_histoire'] ?>">
         
         <div class="form-group">
@@ -23,8 +23,7 @@ $base = rtrim($config['app']['base_url'], '/');
                    id="titre" 
                    name="titre" 
                    value="<?= htmlspecialchars($story['titre']) ?>" 
-                   class="form-control"
-                   required>
+                   class="form-control">
         </div>
         
         <div class="form-group">
@@ -32,8 +31,7 @@ $base = rtrim($config['app']['base_url'], '/');
             <textarea id="contenu" 
                       name="contenu" 
                       rows="6" 
-                      class="form-control"
-                      required><?= htmlspecialchars($story['contenu']) ?></textarea>
+                      class="form-control"><?= htmlspecialchars($story['contenu']) ?></textarea>
         </div>
         
         <div class="form-actions">

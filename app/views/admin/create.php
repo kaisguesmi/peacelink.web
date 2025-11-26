@@ -1,11 +1,11 @@
 <section class="table-card">
     <h3>Nouvelle offre</h3>
-    <form method="post" action="?controller=admin&action=store" class="form-card">
+    <form method="post" action="?controller=admin&action=store" class="form-card" id="admin-offer-create-form">
         <label>Titre
-            <input type="text" name="titre" required>
+            <input type="text" name="titre">
         </label>
         <label>Description
-            <textarea name="description" rows="4" required></textarea>
+            <textarea name="description" rows="4"></textarea>
         </label>
         <label>Statut
             <select name="statut">

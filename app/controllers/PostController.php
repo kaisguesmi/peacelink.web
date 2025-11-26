@@ -96,8 +96,15 @@ class PostController extends Controller
         $content = trim($_POST['content'] ?? '');
 
         if (!$content) {
-            $_SESSION['flash'] = 'Le contenu est obligatoire.';
-            $this->redirect('?controller=post&action=create');
+            $this->view('post/create', [
+                'user' => $user,
+                'formError' => 'Le contenu est obligatoire.',
+                'old' => [
+                    'title' => $title,
+                    'content' => $content,
+                ],
+            ], 'back');
+            return;
         }
 
         $now = date('Y-m-d H:i:s');

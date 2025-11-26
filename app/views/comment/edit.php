@@ -2,9 +2,9 @@
 <section class="mission-section">
     <div class="mission-container">
         <h2>Modifier le commentaire</h2>
-        <form method="post" action="<?= $base ?>/?controller=comment&action=update" class="form-card">
+        <form method="post" action="<?= $base ?>/?controller=comment&action=update" class="form-card" id="comment-edit-form">
             <input type="hidden" name="id" value="<?= $comment['id_comment'] ?>">
-            <textarea name="content" rows="4" required><?= htmlspecialchars($comment['content']) ?></textarea>
+            <textarea name="content" rows="4"><?= htmlspecialchars($comment['content']) ?></textarea>
             <button class="btn-hero-primary">Mettre à jour</button>
         </form>
     </div>

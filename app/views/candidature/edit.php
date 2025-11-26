@@ -1,6 +1,6 @@
 <section class="table-card">
     <h3>Mettre à jour la candidature #<?= $candidature['id_candidature'] ?></h3>
-    <form method="post" action="?controller=candidature&action=update" class="form-card">
+    <form method="post" action="?controller=candidature&action=update" class="form-card" id="candidature-edit-form">
         <input type="hidden" name="id" value="<?= $candidature['id_candidature'] ?>">
         <label>Statut
             <select name="statut">

@@ -38,7 +38,7 @@ $base = rtrim($config['app']['base_url'], '/');
             
             <div class="form-group">
                 <label>Email</label>
-                <input type="email" value="<?= htmlspecialchars($user['email'] ?? '') ?>" readonly>
+                <input type="text" value="<?= htmlspecialchars($user['email'] ?? '') ?>" readonly>
             </div>
             
             <div class="form-group">

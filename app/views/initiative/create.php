@@ -14,15 +14,14 @@ $base = rtrim($config['app']['base_url'], '/');
 </div>
 
 <div class="profile-card">
-    <form method="post" action="<?= $base ?>/?controller=initiative&action=store" class="profile-fields">
+    <form method="post" action="<?= $base ?>/?controller=initiative&action=store" class="profile-fields" id="initiative-create-form">
         <div class="form-group">
             <label for="nom">Nom de l'initiative *</label>
             <input type="text" 
                    id="nom" 
                    name="nom" 
                    class="form-control"
-                   placeholder="Ex: Nettoyage du parc local"
-                   required>
+                   placeholder="Ex: Nettoyage du parc local">
         </div>
         
         <div class="form-group">
@@ -31,8 +30,7 @@ $base = rtrim($config['app']['base_url'], '/');
                       name="description" 
                       rows="5" 
                       class="form-control"
-                      placeholder="Décrivez votre initiative..."
-                      required></textarea>
+                      placeholder="Décrivez votre initiative..."></textarea>
         </div>
         
         <div class="form-group">
@@ -40,8 +38,7 @@ $base = rtrim($config['app']['base_url'], '/');
             <input type="datetime-local" 
                    id="date_evenement" 
                    name="date_evenement" 
-                   class="form-control"
-                   required>
+                   class="form-control">
         </div>
         
         <div class="form-actions">

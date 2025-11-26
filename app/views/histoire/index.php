@@ -35,14 +35,14 @@ unset($_SESSION['flash']);
 <!-- Create Post Form (Hidden by default) -->
 <div class="post-create-card" id="post-create-form" style="display: none; margin-bottom: 30px;">
     <h3 style="margin-bottom: 20px; font-family: var(--font-titre); color: var(--bleu-nuit);">Créer un nouveau post</h3>
-    <form action="<?= $base ?>/?controller=post&action=store" method="POST" class="post-form">
+    <form action="<?= $base ?>/?controller=post&action=store" method="POST" class="post-form" id="post-inline-form">
         <div class="form-group">
             <label for="title">Titre (optionnel)</label>
             <input type="text" id="title" name="title" class="form-control" placeholder="Ajoutez un titre...">
         </div>
         <div class="form-group">
             <label for="content">Contenu *</label>
-            <textarea id="content" name="content" class="form-control" rows="4" placeholder="Quoi de neuf ?" required></textarea>
+            <textarea id="content" name="content" class="form-control" rows="4" placeholder="Quoi de neuf ?"></textarea>
         </div>
         <div style="display: flex; gap: 10px;">
             <button type="submit" class="btn-primary">

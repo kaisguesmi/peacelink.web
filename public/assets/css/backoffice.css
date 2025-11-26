@@ -144,6 +144,26 @@ a { text-decoration: none; color: inherit; }
 .form-subtitle { font-family: var(--font-titre); margin-top: 30px; margin-bottom: 20px; border-top: 1px solid var(--gris-moyen); padding-top: 20px; }
 .form-actions { margin-top: 30px; text-align: right; }
 
+/* Hide deprecated Pending Stories nav entry in admin sidebar */
+.sidebar-nav a[href*="action=pendingStories"] {
+    display: none !important;
+}
+
+/* Inline validation errors */
+.error-message {
+    display: none;
+    margin-left: 8px;
+    font-size: 0.9rem;
+    color: #b00020;
+    transition: opacity 0.18s ease;
+    opacity: 0;
+}
+
+.error-input {
+    outline: 2px solid rgba(176, 0, 32, 0.18);
+    box-shadow: 0 0 0 3px rgba(176, 0, 32, 0.06);
+}
+
 /* --- 11. Gestion des pages et Responsive --- */
 .sidebar.collapsed { width: var(--sidebar-width-collapsed); }
 .sidebar.collapsed .sidebar-header .logo { justify-content: center; }

@@ -14,15 +14,14 @@ $base = rtrim($config['app']['base_url'], '/');
 </div>
 
 <div class="profile-card">
-    <form method="post" action="<?= $base ?>/?controller=histoire&action=store" class="profile-fields">
+    <form method="post" action="<?= $base ?>/?controller=histoire&action=store" class="profile-fields" id="story-create-form">
         <div class="form-group">
             <label for="titre">Titre *</label>
             <input type="text" 
                    id="titre" 
                    name="titre" 
                    class="form-control"
-                   placeholder="Donnez un titre à votre histoire"
-                   required>
+                   placeholder="Donnez un titre à votre histoire">
         </div>
         
         <div class="form-group">
@@ -31,8 +30,7 @@ $base = rtrim($config['app']['base_url'], '/');
                       name="contenu" 
                       rows="6" 
                       class="form-control"
-                      placeholder="Racontez votre histoire..."
-                      required></textarea>
+                      placeholder="Racontez votre histoire..."></textarea>
         </div>
         
         <div class="form-actions">

@@ -14,14 +14,13 @@ $base = rtrim($config['app']['base_url'], '/');
 </div>
 
 <div class="profile-card">
-    <form method="post" action="<?= $base ?>/?controller=auth&action=update" class="profile-fields">
+    <form method="post" action="<?= $base ?>/?controller=auth&action=update" class="profile-fields" id="profile-form">
         <div class="form-group">
             <label for="nom_complet">Nom complet *</label>
             <input type="text" 
                    id="nom_complet" 
                    name="nom_complet" 
                    value="<?= htmlspecialchars($user['nom_complet'] ?? '') ?>" 
-                   required
                    class="form-control">
         </div>
         

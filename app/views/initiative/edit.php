@@ -14,7 +14,7 @@ $base = rtrim($config['app']['base_url'], '/');
 </div>
 
 <div class="profile-card">
-    <form method="post" action="<?= $base ?>/?controller=initiative&action=update" class="profile-fields">
+    <form method="post" action="<?= $base ?>/?controller=initiative&action=update" class="profile-fields" id="initiative-edit-form">
         <input type="hidden" name="id" value="<?= $initiative['id_initiative'] ?>">
         
         <div class="form-group">
@@ -23,8 +23,7 @@ $base = rtrim($config['app']['base_url'], '/');
                    id="nom" 
                    name="nom" 
                    value="<?= htmlspecialchars($initiative['nom']) ?>" 
-                   class="form-control"
-                   required>
+                   class="form-control">
         </div>
         
         <div class="form-group">
@@ -32,8 +31,7 @@ $base = rtrim($config['app']['base_url'], '/');
             <textarea id="description" 
                       name="description" 
                       rows="5" 
-                      class="form-control"
-                      required><?= htmlspecialchars($initiative['description']) ?></textarea>
+                      class="form-control"><?= htmlspecialchars($initiative['description']) ?></textarea>
         </div>
         
         <div class="form-group">

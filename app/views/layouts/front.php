@@ -83,6 +83,7 @@ $base = rtrim($config['app']['base_url'], '/');
     </footer>
 
     <script src="<?= $base ?>/assets/js/smooth-scroll.js"></script>
+    <script src="<?= $base ?>/assets/js/validation.js"></script>
 </body>
 </html>
 

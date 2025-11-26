@@ -1,6 +1,8 @@
 <?php
 $config = require __DIR__ . '/../../../config/config.php';
 $base = rtrim($config['app']['base_url'], '/');
+$formError = $formError ?? null;
+$old = $old ?? ['title' => '', 'content' => ''];
 ?>
 
 <div class="page-header">
@@ -14,14 +16,15 @@ $base = rtrim($config['app']['base_url'], '/');
 </div>
 
 <div class="profile-card">
-    <form method="post" action="<?= $base ?>/?controller=post&action=store" class="profile-fields">
+    <form method="post" action="<?= $base ?>/?controller=post&action=store" class="profile-fields" id="post-create-page-form">
         <div class="form-group">
             <label for="title">Titre (optionnel)</label>
             <input type="text"
                    id="title"
                    name="title"
                    class="form-control"
-                   placeholder="Ajoutez un titre...">
+                   placeholder="Ajoutez un titre..."
+                   value="<?= htmlspecialchars($old['title'] ?? '') ?>">
         </div>
 
         <div class="form-group">
@@ -30,8 +33,12 @@ $base = rtrim($config['app']['base_url'], '/');
                       name="content"
                       rows="6"
                       class="form-control"
-                      required
-                      placeholder="Quoi de neuf ?"></textarea>
+                      placeholder="Quoi de neuf ?"><?= htmlspecialchars($old['content'] ?? '') ?></textarea>
+            <?php if (!empty($formError)): ?>
+                <span class="error-message" style="display: inline-block; opacity: 1;">
+                    <?= htmlspecialchars($formError) ?>
+                </span>
+            <?php endif; ?>
         </div>
 
         <div class="form-actions">

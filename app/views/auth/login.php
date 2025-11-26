@@ -5,12 +5,12 @@
         <?php if (!empty($_SESSION['flash'])): ?>
             <p class="alert-error"><?= $_SESSION['flash']; unset($_SESSION['flash']); ?></p>
         <?php endif; ?>
-        <form method="post" action="<?= $base ?>/?controller=auth&action=authenticate" class="form-card">
+        <form method="post" action="<?= $base ?>/?controller=auth&action=authenticate" class="form-card" id="login-form">
             <label>Email
-                <input type="email" name="email" required>
+                <input type="text" name="email">
             </label>
             <label>Mot de passe
-                <input type="password" name="password" required>
+                <input type="password" name="password">
             </label>
             <button class="btn-hero-primary">Se connecter</button>
         </form>

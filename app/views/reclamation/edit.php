@@ -1,6 +1,6 @@
 <section class="table-card">
     <h3>Mettre à jour la réclamation #<?= $reclamation['id_reclamation'] ?></h3>
-    <form method="post" action="?controller=reclamation&action=update" class="form-card">
+    <form method="post" action="?controller=reclamation&action=update" class="form-card" id="reclamation-edit-form">
         <input type="hidden" name="id" value="<?= $reclamation['id_reclamation'] ?>">
         <label>Statut
             <select name="statut">
