@@ -3,7 +3,7 @@
 
 class Database {
     private static $host = "localhost";
-    // --- ATTENTION : MODIFIEZ CETTE LIGNE ---
+   
     private static $db_name = "gestion_offres_db"; // Mettez le nom de votre BDD
     private static $username = "root";             // Laissez "root" par défaut
     private static $password = "";                 // Laissez vide "" par défaut sur XAMPP

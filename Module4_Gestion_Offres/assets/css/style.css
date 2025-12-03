@@ -1,35 +1,62 @@
 /* --- 1. Importations et Variables --- */
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Poppins:wght@600;700&display=swap');
-:root { --bleu-pastel: #5DADE2; --vert-doux: #7BD389; --orange-chaud: #F4A261; --blanc-pur: #FFFFFF; --gris-clair: #f4f6f9; --gris-moyen: #e9ecef; --gris-fonce: #333333; --bleu-nuit: #1B263B; --rouge-alerte: #E74C3C; --violet-admin: #8E44AD; --font-titre: 'Poppins', sans-serif; --font-texte: 'Open Sans', sans-serif; --sidebar-width: 260px; --sidebar-width-collapsed: 80px; --topbar-height: 70px; --border-radius: 12px; --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); --transition-speed: 0.3s ease; }
+:root { 
+    --bleu-pastel: #5DADE2; 
+    --vert-doux: #7BD389; 
+    --orange-chaud: #F4A261; 
+    --blanc-pur: #FFFFFF; 
+    --gris-clair: #f4f6f9; 
+    --gris-moyen: #e9ecef; 
+    --gris-fonce: #333333; 
+    --bleu-nuit: #1B263B; 
+    --rouge-alerte: #E74C3C; 
+    --violet-admin: #8E44AD; 
+    --font-titre: 'Poppins', sans-serif; 
+    --font-texte: 'Open Sans', sans-serif; 
+    --sidebar-width: 260px; 
+    --topbar-height: 70px; 
+    --border-radius: 12px; 
+    --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); 
+    --transition-speed: 0.3s ease; 
+}
+
 /* --- 2. Styles de base et Reset --- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { width: 100%; height: 100%; overflow-x: hidden; }
 body { font-family: var(--font-texte); background-color: var(--gris-clair); color: var(--gris-fonce); font-size: 16px; line-height: 1.6; }
 a { text-decoration: none; color: inherit; }
-/* --- Layout & Sidebar & Topbar --- */
+
+/* --- Layout Général (Par défaut : Admin) --- */
+.main-content { margin-left: var(--sidebar-width); width: calc(100% - var(--sidebar-width)); transition: margin-left var(--transition-speed), width var(--transition-speed); min-height: 100vh; display: flex; flex-direction: column; }
+.content-wrapper { padding: 30px; flex: 1; }
+.container { max-width: 1200px; margin: 0 auto; width: 100%; }
+
+/* --- Sidebar (ADMIN) --- */
 .sidebar { position: fixed; top: 0; left: 0; width: var(--sidebar-width); height: 100%; background-color: var(--blanc-pur); display: flex; flex-direction: column; border-right: 1px solid var(--gris-moyen); transition: width var(--transition-speed); z-index: 1000; }
-.main-content { margin-left: var(--sidebar-width); width: calc(100% - var(--sidebar-width)); transition: margin-left var(--transition-speed), width var(--transition-speed); }
 .sidebar-header { padding: 0 20px; display: flex; align-items: center; border-bottom: 1px solid var(--gris-moyen); min-height: var(--topbar-height); }
 .sidebar-header .logo img { max-height: 40px; width: auto; }
 .sidebar-nav { flex-grow: 1; padding: 20px 10px; }
+.nav-title { padding: 10px 20px; font-size: 12px; text-transform: uppercase; color: #999; font-weight: 700; margin-top: 10px;}
 .nav-item { display: flex; align-items: center; padding: 12px 20px; margin-bottom: 5px; border-radius: 8px; color: #555; font-weight: 600; cursor: pointer; transition: background-color .2s, color .2s; }
 .nav-item i { width: 25px; margin-right: 15px; font-size: 18px; text-align: center; }
 .nav-item:hover { background-color: var(--gris-clair); color: var(--bleu-pastel); }
 .nav-item.active { background-color: var(--bleu-pastel); color: var(--blanc-pur); box-shadow: 0 4px 8px rgba(93, 173, 226, 0.3); }
-.badge { margin-left: auto; font-size: 12px; font-weight: 700; padding: 3px 8px; border-radius: 12px; }
-.badge.orange { background-color: var(--orange-chaud); color: white; }
 .sidebar-footer { padding: 10px; border-top: 1px solid var(--gris-moyen); }
 .user-profile { display: flex; align-items: center; padding: 10px; border-radius: 8px; }
 .user-avatar { font-size: 20px; margin-right: 10px; }
 .user-info { display: flex; flex-direction: column; white-space: nowrap; overflow: hidden; }
 .user-name { font-weight: 700; }
 .user-role { font-size: 12px; color: #888; }
-.logout-btn { background: none; border: none; font-size: 20px; cursor: pointer; color: #888; }
+.logout-btn { background: none; border: none; font-size: 20px; cursor: pointer; color: #888; display: flex; align-items: center; justify-content: center; width: 40px; }
+.logout-btn:hover { color: var(--rouge-alerte); }
+
+/* --- Topbar (ADMIN) --- */
 .topbar { height: var(--topbar-height); background-color: var(--blanc-pur); padding: 0 30px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--gris-moyen); }
 .topbar-left { display: flex; align-items: center; }
 .menu-toggle { background: none; border: none; font-size: 22px; cursor: pointer; margin-right: 20px; }
-/* --- Contenu Principal --- */
-.content-wrapper { padding: 30px; }
+.icon-btn { background: none; border: none; font-size: 20px; cursor: pointer; }
+
+/* --- UI Elements --- */
 .page-header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; margin-bottom: 30px; }
 .page-header h1 { font-family: var(--font-titre); font-size: 28px; color: var(--bleu-nuit); }
 .btn { padding: 10px 20px; border-radius: 8px; border: 1px solid transparent; cursor: pointer; font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s; }
@@ -38,41 +65,151 @@ a { text-decoration: none; color: inherit; }
 .btn-secondary { background-color: var(--gris-moyen); color: var(--gris-fonce); }
 .btn-success { background-color: var(--vert-doux); color: var(--blanc-pur); }
 .btn-danger { background-color: var(--rouge-alerte); color: var(--blanc-pur); }
-/* --- Cartes et Tableaux --- */
+
+/* --- Cards & Tables --- */
 .stories-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px; }
-.story-card { background-color: var(--blanc-pur); border-radius: var(--border-radius); box-shadow: var(--card-shadow); padding: 25px; display: flex; flex-direction: column; }
+.story-card { background-color: var(--blanc-pur); border-radius: var(--border-radius); box-shadow: var(--card-shadow); padding: 25px; display: flex; flex-direction: column; transition: transform 0.2s; }
+.story-card:hover { transform: translateY(-3px); }
 .story-header { display: flex; justify-content: space-between; font-size: 14px; color: #888; margin-bottom: 15px; border-bottom: 1px solid var(--gris-moyen); padding-bottom: 10px; }
 .story-content h3 { font-family: var(--font-titre); margin-bottom: 10px; color: var(--bleu-nuit); }
-.story-content p { margin-bottom: 20px; }
+.story-content p { margin-bottom: 20px; color: #555; }
 .story-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: auto; }
+.status-badge { font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 4px; background: var(--gris-moyen); color: #555; }
+.status-badge.active { background: rgba(123, 211, 137, 0.2); color: #2ecc71; }
 .table-card { background-color: var(--blanc-pur); padding: 25px; border-radius: var(--border-radius); box-shadow: var(--card-shadow); }
 .table-wrapper { overflow-x: auto; }
 .data-table { width: 100%; border-collapse: collapse; }
 .data-table th, .data-table td { padding: 15px; text-align: left; border-bottom: 1px solid var(--gris-moyen); }
-.data-table th { font-family: var(--font-titre); color: #888; text-transform: uppercase; }
+.data-table th { font-family: var(--font-titre); color: #888; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.5px; }
 .user-cell { display: flex; align-items: center; gap: 10px; font-weight: 600; }
-.user-cell-avatar { width: 35px; height: 35px; border-radius: 50%; background-color: var(--bleu-pastel); color: var(--blanc-pur); display: flex; align-items: center; justify-content: center; font-weight: 700; }
+.user-cell-avatar { width: 35px; height: 35px; border-radius: 50%; background-color: var(--bleu-pastel); color: var(--blanc-pur); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; }
 .role-badge { padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 12px; }
 .role-badge.user { background-color: rgba(150, 150, 150, 0.2); color: #555; }
 .role-badge.expert { background-color: rgba(93, 173, 226, 0.2); color: var(--bleu-pastel); }
 .role-badge.admin { background-color: rgba(142, 68, 173, 0.2); color: var(--violet-admin); }
 .actions-cell { display: flex; gap: 10px; }
-.action-btn { font-size: 18px; cursor: pointer; color: #888; background: none; border: none; }
+.action-btn { font-size: 16px; cursor: pointer; color: #aaa; background: none; border: none; transition: color 0.2s; }
 .action-btn.success:hover { color: var(--vert-doux); }
 .action-btn.danger:hover { color: var(--rouge-alerte); }
-/* --- Formulaires --- */
-.profile-card { max-width: 900px; margin: 0 auto; }
+
+/* --- Forms & Notifs --- */
+.profile-card { max-width: 900px; margin: 0 auto; background: white; padding: 40px; border-radius: var(--border-radius); box-shadow: var(--card-shadow); }
 .profile-fields .form-group { margin-bottom: 20px; }
-.profile-fields label { display: block; font-weight: 600; margin-bottom: 8px; }
-.profile-fields input, .profile-fields textarea { width: 100%; padding: 12px 15px; border: 1px solid var(--gris-moyen); border-radius: 8px; font-size: 16px; }
-.form-actions { margin-top: 30px; text-align: right; }
-/* --- Notifications --- */
+.profile-fields label { display: block; font-weight: 600; margin-bottom: 8px; color: var(--bleu-nuit); }
+.profile-fields input, .profile-fields textarea { width: 100%; padding: 12px 15px; border: 1px solid var(--gris-moyen); border-radius: 8px; font-size: 16px; transition: border-color 0.2s; }
+.profile-fields input:focus, .profile-fields textarea:focus { border-color: var(--bleu-pastel); outline: none; }
+.form-actions { margin-top: 30px; text-align: right; display: flex; justify-content: flex-end; gap: 10px; }
 .notification-banner { padding: 15px 20px; margin-bottom: 25px; border-radius: var(--border-radius); display: flex; align-items: center; background-color: var(--vert-doux); color: var(--blanc-pur); }
-.notification-banner i { font-size: 24px; margin-right: 15px; }
 .status-notification { position: fixed; top: 20px; right: 20px; padding: 15px 25px; border-radius: var(--border-radius); color: var(--blanc-pur); font-weight: 600; z-index: 2000; box-shadow: 0 5px 15px rgba(0,0,0,0.1); opacity: 0; transform: translateY(-20px); animation: slideInFade 0.5s forwards; }
 .status-notification.success { background-color: var(--vert-doux); }
 @keyframes slideInFade { to { opacity: 1; transform: translateY(0); } }
-/* --- Styles pour la Validation JavaScript --- */
 .input-error { border-color: var(--rouge-alerte) !important; }
 .error-message { color: var(--rouge-alerte); font-size: 0.9em; margin-top: 5px; display: none; }
 .error-message.visible { display: block; }
+
+/* ========================================================================= */
+/* |                    STYLES SPECIFIQUES CLIENT                          | */
+/* ========================================================================= */
+
+/* 1. RESET COMPLET DU LAYOUT ADMIN POUR LE CLIENT */
+body.client-mode .main-content {
+    margin-left: 0 !important;   /* Annule la marge de la sidebar */
+    width: 100% !important;
+    padding-top: 20px;
+}
+
+/* Cache définitivement la sidebar et la topbar admin */
+body.client-mode .sidebar, 
+body.client-mode .topbar {
+    display: none !important;
+}
+
+/* 2. BARRE DE NAVIGATION (CLIENT HEADER) */
+.client-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+    z-index: 9999;
+    display: flex;              /* Active Flexbox */
+    justify-content: center;    /* Centre le conteneur intérieur */
+    align-items: center;        /* Centre verticalement */
+}
+
+/* 3. CONTENEUR INTERIEUR (Max 1200px) */
+.nav-container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 30px;
+    display: flex;              /* Active Flexbox pour aligner Logo/Liens/Bouton */
+    justify-content: space-between; /* Ecarte les éléments : Gauche - Centre - Droite */
+    align-items: center;        /* Aligne verticalement */
+}
+
+/* 4. LOGO (Gauche) */
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--bleu-nuit);
+    text-decoration: none;
+}
+.nav-logo img { height: 40px; }
+
+/* 5. LIENS (Centre) */
+.nav-links {
+    display: flex;
+    gap: 40px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #666;
+    font-weight: 600;
+    font-size: 16px;
+    transition: color 0.3s;
+    position: relative;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: var(--bleu-pastel);
+}
+
+.nav-links a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px; left: 0; width: 100%; height: 2px;
+    background-color: var(--bleu-pastel);
+}
+
+/* 6. BOUTON (Droite) */
+.nav-actions .btn-login {
+    background-color: var(--bleu-pastel);
+    color: white;
+    padding: 10px 25px;
+    border-radius: 30px;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 4px 6px rgba(93, 173, 226, 0.3);
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.nav-actions .btn-login:hover {
+    transform: translateY(-2px);
+    background-color: #4fa0d6;
+}
+
+/* Marge pour éviter que le contenu passe sous le header fixe */
+.content-wrapper {
+    margin-top: 80px; 
+}
+
+/* Responsive Mobile (Simple) */
+@media (max-width: 768px) {
+    .nav-links { display: none; } /* Cache les liens sur petit écran */
+}
