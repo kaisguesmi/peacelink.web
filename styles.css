@@ -1,0 +1,98 @@
+:root {
+  --bg: #ffffff;
+  --ink: #111;
+  --muted: #666;
+  --accent: #e87e0c;      /* contour du système */
+  --actor-blue: #2b7fff;  /* acteur Admin en bleu */
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+}
+
+.stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: #fff;
+}
+
+/* Grande surface scrollable (comme le canevas d’origine) */
+svg {
+  min-width: 2000px;
+  min-height: 2000px;
+  display: block;
+}
+
+/* UML */
+.system-boundary {
+  fill: #fffaf6;
+  stroke: var(--accent);
+  stroke-width: 3;
+}
+.system-title {
+  font-size: 14px;
+  fill: var(--muted);
+}
+
+.usecase-ellipse {
+  fill: #ffffff;
+  stroke: #222;
+  stroke-width: 2;
+}
+.usecase-text {
+  font-size: 14px;
+  fill: #111;
+  dominant-baseline: middle;
+  text-anchor: middle;
+}
+
+.assoc {
+  stroke: #111;
+  stroke-width: 2;
+  fill: none;
+}
+.include,
+.extend {
+  stroke: #111;
+  stroke-width: 2;
+  stroke-dasharray: 6 6;
+  fill: none;
+}
+.label {
+  font-size: 12px;
+  font-style: italic;
+  fill: #111;
+  dominant-baseline: middle;
+  text-anchor: middle;
+  user-select: none;
+}
+.inherit {
+  stroke: #111;
+  stroke-width: 2;
+  fill: none;
+}
+
+/* Acteurs (stickman) */
+.actor-stroke {
+  stroke: #111;
+  stroke-width: 2.5;
+  fill: none;
+}
+.actor-name {
+  font-size: 14px;
+  text-anchor: middle;
+  fill: #111;
+}
+.actor-blue .actor-stroke { stroke: var(--actor-blue); }
+.actor-blue .actor-name   { fill: var(--actor-blue); }
+
+/* léger relief */
+.soft-shadow {
+  filter: drop-shadow(0 2px 0 rgba(0,0,0,0.02)) drop-shadow(0 6px 12px rgba(0,0,0,0.08));
+}
