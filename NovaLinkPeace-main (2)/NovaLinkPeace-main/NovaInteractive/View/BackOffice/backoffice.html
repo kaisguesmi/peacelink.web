@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Back Office - PeaceLink</title>
+    <!-- On utilise le MÊME fichier CSS que pour le front-office -->
+    <link rel="stylesheet" href="backofficeStyle.css">
+    <!-- Ajout d'une bibliothèque d'icônes (Font Awesome) pour illustrer -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.css">
+</head>
+
+<body>
+
+    <!-- =========== 1. Barre Latérale (Sidebar) =========== -->
+    <div class="sidebar">
+        <!-- En-tête de la sidebar -->
+        <div class="sidebar-header">
+            <a href="#" class="logo">
+                <img src="mon-logo.png" alt="Logo PeaceLink">
+                <span>PeaceLink</span>
+            </a>
+        </div>
+
+        <!-- Navigation principale -->
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-item">
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="#" class="nav-item active">
+                <i class="fa-solid fa-flag"></i>
+                <span>Reclamations</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fa-solid fa-book-open"></i>
+                <span>Stories</span>
+                <span class="badge orange">3</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fa-solid fa-hand-holding-heart"></i>
+                <span>Initiatives</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fa-solid fa-users"></i>
+                <span>Users</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fa-solid fa-gear"></i>
+                <span>Settings</span>
+            </a>
+        </nav>
+
+        <!-- Pied de page de la sidebar -->
+        <div class="sidebar-footer">
+            <div class="user-profile">
+                <i class="fa-solid fa-user-circle user-avatar"></i>
+                <div class="user-info">
+                    <span class="user-name">Admin User</span>
+                    <span class="user-role">Administrator</span>
+                </div>
+            </div>
+            <button class="logout-btn" aria-label="Logout" onclick="logout()">
+                <i class="fa-solid fa-right-from-bracket"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- =========== 2. Contenu Principal =========== -->
+    <div class="main-content">
+        <!-- Barre supérieure (Topbar) -->
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="menu-toggle" id="menu-toggle" aria-label="Toggle Menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+            <div class="topbar-right">
+                <button class="icon-btn">
+                    <i class="fa-solid fa-bell"></i>
+                    <span class="notification-dot"></span>
+                </button>
+                <button class="icon-btn">
+                    <i class="fa-solid fa-envelope"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Contenu de la page -->
+        <main class="content-wrapper">
+            <!-- En-tête de la page -->
+            <div class="page-header">
+                <div>
+                    <h1>Reclamations</h1>
+                    <p class="page-subtitle">Overview of Reports and Analytics</p>
+                </div>
+            </div>
+
+            <!-- Filters Section -->
+            <div class="table-card" style="margin-bottom: 20px;">
+                <h3>Filters</h3>
+                <div class="filters-container"
+                    style="display: flex; gap: 20px; flex-wrap: wrap; align-items: flex-start; padding: 15px;">
+                    <div>
+                        <label for="filterStatus">Status:</label>
+                        <select id="filterStatus" class="form-control">
+                            <option value="">All</option>
+                            <option value="pending">Pending</option>
+                            <option value="accepted">Accepted</option>
+                            <option value="denied">Denied</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="filterCategory">Category:</label>
+                        <select id="filterCategory" class="form-control">
+                            <option value="">All</option>
+                            <option value="Sexual Harassment">Sexual Harassment</option>
+                            <option value="Suicide">Suicide</option>
+                            <option value="Ethnicity">Ethnicity</option>
+                            <option value="Sexism">Sexism</option>
+                            <option value="Fraud">Fraud</option>
+                            <option value="Violence">Violence</option>
+                            <option value="Spam">Spam</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <button onclick="applyFilters()" class="btn-primary">Apply
+                            Filters</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grille de graphiques -->
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3>Reports by Category</h3>
+                    </div>
+                    <div class="chart-body">
+                        <canvas id="categoryChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3>Reports by Status</h3>
+                    </div>
+                    <div class="chart-body">
+                        <canvas id="statusChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="chart-card" style="margin-top: 20px;">
+                <div class="chart-header">
+                    <h3>Reports Over Time</h3>
+                </div>
+                <div class="chart-body">
+                    <canvas id="timeChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Tableau des réclamations -->
+            <div class="table-card" style="margin-top: 20px;">
+                <h3>Recent Complaints</h3>
+                <div class="table-wrapper">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Author</th>
+                                <th>Type</th>
+                                <th>Category</th>
+                                <th>Reason</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="complaintsTableBody"></tbody>
+                            
+                        </tbody>
+                    </table>
+                    <div id="paginationControls" style="margin-top:12px; display:flex; justify-content:center; gap:8px;
+                        align-items:center;
+                    "></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Edit Category Modal -->
+    <div id="editModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeEditModal()">&times;</span>
+            <h2>Edit Category</h2>
+            <form id="editForm">
+                <input type="hidden" id="editId">
+                <label for="editCategory">New Category:</label>
+                <select id="editCategory" required class="form-control">
+                    <option value="Sexual Harassment">Sexual Harassment</option>
+                    <option value="Suicide">Suicide</option>
+                    <option value="Ethnicity">Ethnicity</option>
+                    <option value="Sexism">Sexism</option>
+                    <option value="Fraud">Fraud</option>
+                    <option value="Violence">Violence</option>
+                    <option value="Spam">Spam</option>
+                    <option value="Other">Other</option>
+                </select>
+                <button type="submit" class="btn-primary" style="margin-top: 15px;">Update Category</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Response Modal -->
+    <div id="responseModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeResponseModal()">&times;</span>
+            <h2>Process Report</h2>
+            <form id="responseForm">
+                <input type="hidden" id="responseId">
+                <input type="hidden" id="responseStatus">
+                <p>Action: <span id="responseActionText" style="font-weight:bold;"></span></p>
+                <div style="margin-top:10px;">
+                    <label for="adminResponse">Message to user (optional):</label>
+                    <textarea id="adminResponse" rows="5" style="width:100%; padding:8px; margin-top:6px;" placeholder="Write a message to the user..."></textarea>
+                </div>
+                <div style="display:flex; gap:8px; margin-top:12px; justify-content:flex-end;">
+                    <button type="button" class="btn-secondary" onclick="closeResponseModal()">Cancel</button>
+                    <button type="submit" class="btn-primary">Confirm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Tooltip for Hover Preview -->
+    <div id="previewTooltip"
+        style="display: none; position: absolute; background: #333; color: #fff; padding: 10px; border-radius: 4px; z-index: 1000; max-width: 300px; font-size: 0.9em; pointer-events: none;">
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.js"></script>
+    <script src="backoffice.js"></script>
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const sidebar = document.querySelector('.sidebar');
+
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+        });
+    </script>
+</body>
+
+</html>
